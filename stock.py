@@ -1,37 +1,24 @@
-import requests
-import os
+symbol = "TSLA"
+target = 1
 
-API_KEY = os.environ["FINNHUB_KEY"]
-DINGTALK_WEBHOOK = os.environ["DINGTALK_WEBHOOK"]
+url = f"https://finnhub.io/api/v1/quote?symbol={symbol}&token={API_KEY}"
 
-WATCH_LIST = {
-    "TSLA": 1
-}
+data = requests.get(url).json()
 
-for symbol, target in WATCH_LIST.items():
+price = data["c"]
 
-    url = f"https://finnhub.io/api/v1/quote?symbol={symbol}&token={API_KEY}"
+if price > target:
 
-    data = requests.get(url).json()
-
-    price = data.get("c", 0)
-
-    print(symbol, price)
-
-    if price > target:
-
-        msg = {
-            "msgtype": "text",
-            "text": {
+    requests.post(
+        WEBHOOK,
+        json={
+            "msgtype":"text",
+            "text":{
                 "content":
                 f"【K股票预警】\n"
                 f"股票:{symbol}\n"
                 f"当前价格:{price}\n"
-                f"触发条件:>{target}"
+                f"触发价格:{target}"
             }
         }
-
-        requests.post(
-            DINGTALK_WEBHOOK,
-            json=msg
-        )
+    )
