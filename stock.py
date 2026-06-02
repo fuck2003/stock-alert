@@ -26,7 +26,7 @@ for symbol, target in WATCH_LIST.items():
             "msgtype": "text",
             "text": {
                 "content":
-                f"【股票预警】\n"
+                f"【K股票预警】\n"
                 f"股票:{symbol}\n"
                 f"当前价格:{price}\n"
                 f"触发条件:>{target}"
