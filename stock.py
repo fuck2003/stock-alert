@@ -5,9 +5,7 @@ API_KEY = os.environ["FINNHUB_KEY"]
 DINGTALK_WEBHOOK = os.environ["DINGTALK_WEBHOOK"]
 
 WATCH_LIST = {
-    "AAPL": 300,
-    "TSLA": 400,
-    "NVDA": 200
+    "TSLA": 430, 
 }
 
 for symbol, target in WATCH_LIST.items():
