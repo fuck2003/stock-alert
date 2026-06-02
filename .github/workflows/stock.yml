@@ -2,7 +2,7 @@ name: Stock Alert
 
 on:
   schedule:
-    - cron: '*/1 * * * *'
+    - cron: '* * * * *'
 
   workflow_dispatch:
 
